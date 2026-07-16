@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumer Rewards Panel - CashApp Reward Offer</title>
+    <style>
+        :root {
+            --cashapp-green: #00D632;
+            --dark-bg: #111111;
+            --card-bg: #1A1A1A;
+            --text-main: #FFFFFF;
+            --text-muted: #AAAAAA;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--cashapp-green);
+        }
+
+        main {
+            width: 100%;
+            max-width: 450px;
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin: 40px 0;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .accent-text {
+            color: var(--cashapp-green);
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* Quiz Container */
+        .quiz-container {
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .question {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .btn-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        button.option-btn {
+            background-color: #252525;
+            color: var(--text-main);
+            border: 1px solid #333;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        button.option-btn:hover {
+            background-color: var(--cashapp-green);
+            color: #000;
+            border-color: var(--cashapp-green);
+        }
+
+        /* Loading Screen */
+        .loading-text {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* Final Action Button */
+        .cta-btn {
+            background-color: var(--cashapp-green);
+            color: #000;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 214, 50, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.02);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 600px;
+            margin-top: auto;
+            border-top: 1px solid #222;
+            padding-top: 15px;
+            width: 100%;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VOX<span>PANEL</span></div>
+    </header>
+
+    <main>
+        <h1>Claim Your <span class="accent-text">$750 Cash App</span> Reward</h1>
+        <p class="subtitle">Complete our brief consumer feedback preference check to qualify for the review pool.</p>
+
+        <div class="quiz-container">
+            <!-- Step 1 -->
+            <div class="step active" id="step1">
+                <div class="question">Step 1: Which device operating system do you currently use?</div>
+                <div class="btn-grid">
+                    <button class="option-btn" onclick="nextStep(1, 2)">Apple iOS</button>
+                    <button class="option-btn" onclick="nextStep(1, 2)">Android</button>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step" id="step2">
+                <div class="question">Step 2: How frequently do you utilize Cash App for digital transfers?</div>
+                <div class="btn-grid">
+                    <button class="option-btn" onclick="nextStep(2, 3)">Daily</button>
+                    <button class="option-btn" onclick="nextStep(2, 3)">Weekly / Monthly</button>
+                    <button class="option-btn" onclick="nextStep(2, 3)">Never, I want to create an account</button>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step" id="step3">
+                <div class="question">Step 3: What is your primary purpose for using online rewards?</div>
+                <div class="btn-grid">
+                    <button class="option-btn" onclick="showLoading()">Personal Shopping</button>
+                    <button class="option-btn" onclick="showLoading()">Savings & Investments</button>
+                </div>
+            </div>
+
+            <!-- Loading Step -->
+            <div class="step" id="loadingStep">
+                <div class="question">Verifying Eligibility...</div>
+                <p class="loading-text">Checking available slots for your region...</p>
+            </div>
+
+            <!-- Final Step -->
+            <div class="step" id="finalStep">
+                <div class="question" style="color: var(--cashapp-green);">Status: Confirmed Eligible!</div>
+                <p class="subtitle" style="margin-bottom: 20px;">Click below to initialize your consumer profile evaluation and claim your reward entry.</p>
+                <!-- هاد الرابط غدوة نبدلوه برابط التتبع تاع ماكس باونتي -->
+                <a href="https://google.com" class="cta-btn" id="offerLink">CONTINUE TO EVALUATION</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 VoxPanel Consumer Research. All rights reserved.</p>
+        <p>This market research initiative is independent and not directly affiliated with or endorsed by Block, Inc. or Cash App.</p>
+        <p>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Contact Support</a>
+        </p>
+    </footer>
+
+    <script>
+        function nextStep(current, next) {
+            document.getElementById('step' + current).classList.remove('active');
+            document.getElementById('step' + next).classList.add('active');
+        }
+
+        function showLoading() {
+            document.getElementById('step3').classList.remove('active');
+            document.getElementById('loadingStep').classList.add('active');
+            
+            setTimeout(function() {
+                document.getElementById('loadingStep').classList.remove('active');
+                document.getElementById('finalStep').classList.add('active');
+            }, 1800); // 1.8 seconds delay for realism
+        }
+    </script>
+</body>
+</html>
