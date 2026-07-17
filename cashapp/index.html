@@ -68,6 +68,79 @@
             margin: auto;
         }
 
+        /* Stylized Cash App Card */
+        .cash-card-wrapper {
+            perspective: 1000px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cash-card {
+            width: 180px;
+            height: 110px;
+            background: linear-gradient(135deg, #00d632 0%, #009e24 100%);
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 214, 50, 0.3);
+            transform: rotateY(-10deg) rotateX(10deg);
+            transition: transform 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cash-card:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 214, 50, 0.5);
+        }
+
+        .card-chip {
+            width: 24px;
+            height: 18px;
+            background: linear-gradient(135deg, #f0d060 0%, #cc9933 100%);
+            border-radius: 3px;
+        }
+
+        .card-logo {
+            font-size: 14px;
+            font-weight: 800;
+            color: #ffffff;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+        }
+
+        .card-number {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 1.5px;
+            margin-top: 15px;
+        }
+
+        .card-holder-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .card-holder {
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-value {
+            font-size: 14px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        /* Titles and Texts */
         .card h1 {
             font-size: 24px;
             font-weight: 700;
@@ -151,24 +224,6 @@
         footer a:hover {
             color: var(--primary-green);
         }
-
-        /* Mini Gift Icon Decoration */
-        .icon-box {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            background-color: rgba(0, 214, 50, 0.1);
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-
-        .icon-box svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--primary-green);
-        }
     </style>
 </head>
 <body>
@@ -178,12 +233,21 @@
     </header>
 
     <main class="card">
-        <div class="icon-box">
-            <!-- SVG Gift Icon -->
-            <svg viewBox="0 0 24 24">
-                <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35-.54-.81-1.45-1.35-2.5-1.35-1.66 0-3 1.34-3 3 0 .35.07.69.18 1H5c-1.1 0-2 .9-2 2v3c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V8c0-1.1-.9-2-2-2zM15 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-6 1c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1zM5 19c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-7H5v7z"/>
-            </svg>
+        <!-- 3D Realistic Cash App Card Element -->
+        <div class="cash-card-wrapper">
+            <div class="cash-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="card-chip"></div>
+                    <div class="card-logo">Cash App</div>
+                </div>
+                <div class="card-number">•••• •••• •••• 750</div>
+                <div class="card-holder-group">
+                    <div class="card-holder">GIFT CARD</div>
+                    <div class="card-value">$750</div>
+                </div>
+            </div>
         </div>
+
         <h1>Claim Your <span class="highlight">$750 Cash App</span> Reward</h1>
         <p>Complete our brief consumer feedback preference check to qualify for the review pool.</p>
 
@@ -207,7 +271,6 @@
 
     <script>
         function nextStep() {
-            // هنا مستقبلا نزيدو الكود اللي يدي الزائر للاسئلة الباقية ثم يحولو لعرض MaxBounty
             alert("Perfect! Moving to the next step...");
         }
     </script>
