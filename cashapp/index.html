@@ -3,259 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoxPanel - Premium Consumer Feedback</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Consumer Rewards Panel - CashApp Reward Offer</title>
     <style>
         :root {
-            --bg-color: #0b0b0b;
-            --card-bg: #121212;
-            --primary-green: #00D632;
-            --text-color: #ffffff;
-            --text-muted: #a0a0a0;
-            --border-color: #222222;
+            --cashapp-green: #00D632;
+            --dark-bg: #111111;
+            --card-bg: #1A1A1A;
+            --text-main: #FFFFFF;
+            --text-muted: #AAAAAA;
         }
-
+        
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--dark-bg);
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
             align-items: center;
             justify-content: space-between;
-            min-height: 100vh;
-            padding: 40px 20px;
-            overflow-x: hidden;
+            padding: 20px;
         }
 
-        /* Header / Logo Section */
         header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        .logo span:first-child {
-            color: var(--text-color);
-        }
-
-        .logo span:last-child {
-            color: var(--primary-green);
-        }
-
-        /* Card Container */
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            width: 100%;
-            max-width: 520px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            margin: auto;
-        }
-
-        /* Stylized Cash App Card */
-        .cash-card-wrapper {
-            perspective: 1000px;
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .cash-card {
-            width: 180px;
-            height: 110px;
-            background: linear-gradient(135deg, #00d632 0%, #009e24 100%);
-            border-radius: 10px;
-            position: relative;
-            box-shadow: 0 8px 25px rgba(0, 214, 50, 0.3);
-            transform: rotateY(-10deg) rotateX(10deg);
-            transition: transform 0.5s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 12px;
-            text-align: left;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .cash-card:hover {
-            transform: rotateY(0deg) rotateX(0deg) scale(1.05);
-            box-shadow: 0 12px 30px rgba(0, 214, 50, 0.5);
-        }
-
-        .card-chip {
-            width: 24px;
-            height: 18px;
-            background: linear-gradient(135deg, #f0d060 0%, #cc9933 100%);
-            border-radius: 3px;
-        }
-
-        .card-logo {
-            font-size: 14px;
-            font-weight: 800;
-            color: #ffffff;
-            position: absolute;
-            top: 12px;
-            right: 12px;
-        }
-
-        .card-number {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 1.5px;
-            margin-top: 15px;
-        }
-
-        .card-holder-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .card-holder {
-            font-size: 9px;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .card-value {
-            font-size: 14px;
-            font-weight: 800;
-            color: #ffffff;
-        }
-
-        /* Titles and Texts */
-        .card h1 {
             font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--cashapp-green);
+        }
+
+        main {
+            width: 100%;
+            max-width: 450px;
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin: 40px 0;
+        }
+
+        h1 {
+            font-size: 22px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             line-height: 1.3;
         }
 
-        .highlight {
-            color: var(--primary-green);
+        .accent-text {
+            color: var(--cashapp-green);
         }
 
-        .card p {
+        p.subtitle {
             color: var(--text-muted);
             font-size: 14px;
             margin-bottom: 30px;
-            line-height: 1.5;
         }
 
-        /* Step Section */
-        .step-title {
-            font-size: 15px;
+        /* Quiz Container */
+        .quiz-container {
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .question {
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 20px;
-            color: var(--text-color);
-            letter-spacing: 0.5px;
         }
 
-        /* Quiz Buttons */
-        .btn-group {
+        .btn-grid {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .quiz-btn {
-            background-color: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 16px 20px;
+        button.option-btn {
+            background-color: #252525;
+            color: var(--text-main);
+            border: 1px solid #333;
+            padding: 14px;
             font-size: 15px;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.25s ease;
-            text-align: center;
+            transition: all 0.2s ease;
+            width: 100%;
         }
 
-        .quiz-btn:hover {
-            background-color: var(--primary-green);
-            color: #000000;
-            border-color: var(--primary-green);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 214, 50, 0.2);
+        button.option-btn:hover {
+            background-color: var(--cashapp-green);
+            color: #000;
+            border-color: var(--cashapp-green);
         }
 
-        .quiz-btn:active {
-            transform: translateY(0);
+        /* Loading Screen */
+        .loading-text {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-top: 10px;
         }
 
-        /* Footer */
+        /* Final Action Button */
+        .cta-btn {
+            background-color: var(--cashapp-green);
+            color: #000;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 214, 50, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.02);
+        }
+
         footer {
             text-align: center;
-            margin-top: 40px;
-            max-width: 800px;
-        }
-
-        footer p {
             font-size: 11px;
-            color: #555555;
+            color: var(--text-muted);
             line-height: 1.6;
-            margin-bottom: 10px;
+            max-width: 600px;
+            margin-top: auto;
+            border-top: 1px solid #222;
+            padding-top: 15px;
+            width: 100%;
         }
 
         footer a {
-            color: #777777;
-            text-decoration: none;
-            margin: 0 8px;
-            transition: color 0.2s ease;
+            color: var(--text-muted);
+            text-decoration: underline;
+            margin: 0 5px;
         }
 
-        footer a:hover {
-            color: var(--primary-green);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo"><span>VOX</span><span>PANEL</span></div>
+        <div class="logo">VOX<span>PANEL</span></div>
     </header>
 
-    <main class="card">
-        <!-- 3D Realistic Cash App Card Element -->
-        <div class="cash-card-wrapper">
-            <div class="cash-card">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div class="card-chip"></div>
-                    <div class="card-logo">Cash App</div>
-                </div>
-                <div class="card-number">•••• •••• •••• 750</div>
-                <div class="card-holder-group">
-                    <div class="card-holder">GIFT CARD</div>
-                    <div class="card-value">$750</div>
+    <main>
+        <h1>Claim Your <span class="accent-text">$750 Cash App</span> Reward</h1>
+        <p class="subtitle">Complete our brief consumer feedback preference check to qualify for the review pool.</p>
+
+        <div class="quiz-container">
+            <!-- Step 1 -->
+            <div class="step active" id="step1">
+                <div class="question">Step 1: Which device operating system do you currently use?</div>
+                <div class="btn-grid">
+                    <button class="option-btn" onclick="nextStep(1, 2)">Apple iOS</button>
+                    <button class="option-btn" onclick="nextStep(1, 2)">Android</button>
                 </div>
             </div>
-        </div>
 
-        <h1>Claim Your <span class="highlight">$750 Cash App</span> Reward</h1>
-        <p>Complete our brief consumer feedback preference check to qualify for the review pool.</p>
+            <!-- Step 2 -->
+            <div class="step" id="step2">
+                <div class="question">Step 2: How frequently do you utilize Cash App for digital transfers?</div>
+                <div class="btn-grid">
+                    <button class="option-btn" onclick="nextStep(2, 3)">Daily</button>
+                    <button class="option-btn" onclick="nextStep(2, 3)">Weekly / Monthly</button>
+                    <button class="option-btn" onclick="nextStep(2, 3)">Never, I want to create an account</button>
+                </div>
+            </div>
 
-        <div class="step-title">Step 1: Which device operating system do you currently use?</div>
-        
-        <div class="btn-group">
-            <button class="quiz-btn" onclick="nextStep()">Apple iOS</button>
-            <button class="quiz-btn" onclick="nextStep()">Android</button>
+            <!-- Step 3 -->
+            <div class="step" id="step3">
+                <div class="question">Step 3: What is your primary purpose for using online rewards?</div>
+                <div class="btn-grid">
+                    <button class="option-btn" onclick="showLoading()">Personal Shopping</button>
+                    <button class="option-btn" onclick="showLoading()">Savings & Investments</button>
+                </div>
+            </div>
+
+            <!-- Loading Step -->
+            <div class="step" id="loadingStep">
+                <div class="question">Verifying Eligibility...</div>
+                <p class="loading-text">Checking available slots for your region...</p>
+            </div>
+
+            <!-- Final Step -->
+            <div class="step" id="finalStep">
+                <div class="question" style="color: var(--cashapp-green);">Status: Confirmed Eligible!</div>
+                <p class="subtitle" style="margin-bottom: 20px;">Click below to initialize your consumer profile evaluation and claim your reward entry.</p>
+                <!-- هاد الرابط غدوة نبدلوه برابط التتبع تاع ماكس باونتي -->
+                <a href="https://google.com" class="cta-btn" id="offerLink">CONTINUE TO EVALUATION</a>
+            </div>
         </div>
     </main>
 
@@ -270,8 +242,19 @@
     </footer>
 
     <script>
-        function nextStep() {
-            alert("Perfect! Moving to the next step...");
+        function nextStep(current, next) {
+            document.getElementById('step' + current).classList.remove('active');
+            document.getElementById('step' + next).classList.add('active');
+        }
+
+        function showLoading() {
+            document.getElementById('step3').classList.remove('active');
+            document.getElementById('loadingStep').classList.add('active');
+            
+            setTimeout(function() {
+                document.getElementById('loadingStep').classList.remove('active');
+                document.getElementById('finalStep').classList.add('active');
+            }, 1800); // 1.8 seconds delay for realism
         }
     </script>
 </body>
