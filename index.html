@@ -6,10 +6,11 @@
     <title>VoxPanel - Global Consumer Analytics</title>
     <style>
         :root {
-            --bg-color: #0a0c0d;
-            --miami-blue: #00e5ff; /* هادا هو اللون المياحي المفتوح اللي حبيت عليه */
+            --bg-color: #040a0f;
+            --miami-blue: #00e5ff;
             --sky-blue: #00a2ff;
             --text-light: #ffffff;
+            --text-gray: #b0c4de; /* لون رمادي مايل للأزرق الخفيف يوالم البحر */
         }
 
         * {
@@ -25,13 +26,13 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* يحط كلش في الوسط */
+            justify-content: center;
             align-items: center;
             position: relative;
             overflow: hidden;
         }
 
-        /* التصويرة المظلمة والمضببة تع الخلفية ضد التجسس */
+        /* خلفية اليخت الفخم والبحر المضلل والمضبب */
         .bg-overlay {
             position: absolute;
             top: 0;
@@ -39,9 +40,9 @@
             width: 100%;
             height: 100%;
             background: 
-                linear-gradient(135deg, rgba(10, 12, 13, 0.96) 0%, rgba(10, 12, 13, 0.85) 100%),
-                url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1000&auto=format&fit=crop') no-repeat center center/cover;
-            filter: blur(8px); /* تضبيب عالي للغموض */
+                linear-gradient(135deg, rgba(4, 10, 15, 0.92) 0%, rgba(4, 10, 15, 0.82) 100%),
+                url('https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?q=80&w=1200&auto=format&fit=crop') no-repeat center center/cover;
+            filter: blur(4px); /* تضبيب خفيف باش تبان الطمأنينة والفخامة */
             z-index: 1;
         }
 
@@ -49,12 +50,16 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            max-width: 600px;
-            padding: 30px;
+            max-width: 620px;
+            padding: 40px;
+            background: rgba(4, 10, 15, 0.6); /* كادر شفاف خفيف باش تزيد تبان التصويرة تع البحر */
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 229, 255, 0.05);
         }
 
         .logo {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 900;
             letter-spacing: 5px;
             margin-bottom: 25px;
@@ -63,46 +68,59 @@
 
         .logo span {
             color: var(--miami-blue);
-            text-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+            text-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
         }
 
         h1 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 15px;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 20px;
             letter-spacing: -0.5px;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         p.tagline {
-            color: #70777a;
-            font-size: 15px;
-            margin-bottom: 40px;
+            color: var(--text-gray);
+            font-size: 16px;
+            margin-bottom: 45px;
             line-height: 1.6;
         }
 
-        /* البوتون المياحي المشع في الوسط */
+        /* البوتون المياحي الأساسي المشع */
         .cta-btn {
             background: linear-gradient(135deg, var(--miami-blue), var(--sky-blue));
-            color: #000000;
+            color: #040a0f;
             border: none;
             padding: 18px 45px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 0 35px rgba(0, 229, 255, 0.5);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
             transition: all 0.3s ease;
             letter-spacing: 1px;
-            text-transform: uppercase;
+            margin-bottom: 25px;
         }
 
         .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 45px rgba(0, 229, 255, 0.8);
-            background: linear-gradient(135deg, var(--sky-blue), var(--miami-blue));
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.6);
+        }
+
+        .privacy-link {
+            font-size: 13px;
+            color: var(--text-gray);
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s;
+            opacity: 0.8;
+        }
+
+        .privacy-link:hover {
+            color: var(--miami-blue);
+            opacity: 1;
         }
     </style>
 </head>
@@ -112,11 +130,13 @@
 
     <div class="main-content">
         <div class="logo">VOX<span>PANEL</span></div>
-        <h1>Institutional Research Portal</h1>
-        <p class="tagline">Global consumer intelligence and decentralized demographic audits. Access is restricted to authorized panel validation nodes only.</p>
+        <h1>Global Consumer Intelligence</h1>
+        <p class="tagline">We collect decentralized demographic audits for enterprise market research. Participating members are compensated for sharing unique consumer perspectives.</p>
         
-        <!-- البوتون الوحيد في الوسط -->
-        <a href="#" class="cta-btn">Access Audit Suite</a>
+        <!-- البوتون المريغل -->
+        <a href="https://voxpanel.xyz/32213/" class="cta-btn">JOIN RESEARCH PANEL</a>
+        
+        <a href="privacy.html" class="privacy-link">Privacy Certified & GDPR Compliant</a>
     </div>
 
 </body>
