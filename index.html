@@ -3,143 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoxPanel | Premium Global Market Research</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>VoxPanel - Global Consumer Analytics</title>
     <style>
         :root {
-            --bg-color: #0b0b0b;
-            --card-bg: #121212;
-            --primary-green: #00D632;
-            --text-color: #ffffff;
-            --text-muted: #a0a0a0;
-            --border-color: #222222;
+            --bg-color: #0a0c0d;
+            --miami-blue: #00e5ff; /* اللون اللي حبيت عليه تع ميامي بلو */
+            --sky-blue: #00a2ff;
+            --text-light: #ffffff;
+            --text-gray: #70777a;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: var(--text-light);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: space-between;
-            min-height: 100vh;
-            padding: 40px 20px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* الخلفية المظلمة والمضببة لحمايتك من التجسس */
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, rgba(10, 12, 13, 0.95) 0%, rgba(10, 12, 13, 0.8) 100%),
+                url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1000&auto=format&fit=crop') no-repeat center center/cover;
+            filter: blur(4px); /* التضبيب */
+            z-index: 1;
         }
 
         header {
+            position: relative;
+            z-index: 2;
+            margin-top: 40px;
             text-align: center;
-            margin-bottom: 20px;
+            width: 100%;
         }
 
         .logo {
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--text-light);
         }
 
-        .logo span:first-child {
-            color: var(--text-color);
+        .logo span {
+            color: var(--miami-blue);
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
         }
 
-        .logo span:last-child {
-            color: var(--primary-green);
-        }
-
-        .hero-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            width: 100%;
-            max-width: 600px;
-            padding: 50px 40px;
+        .main-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            margin: auto;
+            max-width: 600px;
+            padding: 20px;
         }
 
-        .hero-card h1 {
-            font-size: 28px;
-            font-weight: 800;
+        h1 {
+            font-size: 38px;
+            font-weight: 700;
             margin-bottom: 16px;
-            line-height: 1.3;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
         }
 
-        .hero-card p {
-            color: var(--text-muted);
-            font-size: 15px;
+        p.tagline {
+            color: #94a1a6;
+            font-size: 16px;
             margin-bottom: 35px;
             line-height: 1.6;
         }
 
+        /* البوتون الميامي بلو المشع */
         .cta-btn {
-            display: inline-block;
-            background-color: var(--primary-green);
+            background: linear-gradient(135deg, var(--miami-blue), var(--sky-blue));
             color: #000000;
-            padding: 18px 36px;
+            border: none;
+            padding: 16px 36px;
             font-size: 16px;
             font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
             text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.25s ease;
-            box-shadow: 0 5px 15px rgba(0, 214, 50, 0.2);
+            display: inline-block;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
         }
 
         .cta-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 214, 50, 0.4);
-            background-color: #00ff3c;
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.7);
+            background: linear-gradient(135deg, var(--sky-blue), var(--miami-blue));
         }
 
         footer {
+            position: relative;
+            z-index: 2;
+            padding: 30px 20px;
             text-align: center;
-            margin-top: 40px;
-        }
-
-        footer p {
-            font-size: 11px;
-            color: #555555;
-            line-height: 1.6;
-            margin-bottom: 10px;
+            font-size: 12px;
+            color: var(--text-gray);
+            width: 100%;
+            background: rgba(10, 12, 13, 0.9);
+            border-top: 1px solid #14191b;
         }
 
         footer a {
-            color: #777777;
+            color: var(--text-gray);
             text-decoration: none;
-            margin: 0 8px;
+            margin: 0 12px;
+            transition: color 0.2s;
         }
 
         footer a:hover {
-            color: var(--primary-green);
+            color: var(--miami-blue);
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-overlay"></div>
+
     <header>
-        <div class="logo"><span>VOX</span><span>PANEL</span></div>
+        <div class="logo">VOX<span>PANEL</span></div>
     </header>
 
-    <main class="hero-card">
-        <h1>Your Voice, Your Rewards</h1>
-        <p>Welcome to VoxPanel, the premier destination for global consumer research. We connect world-class brands with real consumers like you. Share your insights, complete high-value evaluations, and get compensated instantly.</p>
-        <a href="./cashapp/" class="cta-btn">View Available Audits</a>
-    </main>
+    <div class="main-content">
+        <h1>Next-Gen Consumer Intelligence Portal</h1>
+        <p class="tagline">We process institutional demographic audits and consumer behavior data streams for global enterprise research. Access is strictly restricted to active panel verification nodes.</p>
+        
+        <!-- حط كاش رابط تع عرض عام هنا، ولا خليه ديريكت يدي لمجلد أمازون مؤقتا إذا حبيت -->
+        <a href="https://voxpanel.xyz/32213/" class="cta-btn">ENTER AUDIT PANEL</a>
+    </div>
 
     <footer>
-        <p>© 2026 VoxPanel Global Research. All rights reserved.</p>
-        <p>We are committed to securing your data and offering compliant market research opportunities worldwide.</p>
-        <p>
-            <a href="#">Privacy Policy</a> | 
-            <a href="#">Terms of Service</a> | 
-            <a href="#">Contact Us</a>
+        <p>© 2026 VoxPanel Global Analytics. All rights reserved.</p>
+        <p style="margin-top: 10px;">
+            <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a> | <a href="contact.html">Contact Us</a>
         </p>
     </footer>
 
