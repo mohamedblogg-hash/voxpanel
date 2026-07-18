@@ -1,1 +1,333 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoxPanel - Premium Rewards</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #0f1111; /* خلفية أمازون الداكنة الفخمة */
+            --card-bg: #1a1d1d;
+            --primary-orange: #ff9900; /* برتقالي أمازون الرسمي */
+            --amazon-blue: #146eb4;
+            --text-light: #ffffff;
+            --text-gray: #a7a9a9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: space-between;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        header {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-light);
+        }
+
+        .logo span {
+            color: var(--primary-orange);
+            text-shadow: 0 0 15px rgba(255, 153, 0, 0.4);
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #2a2e2e;
+            border-radius: 16px;
+            padding: 30px 24px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--amazon-blue));
+        }
+
+        /* أنيميشين لبطاقة أمازون الفخمة */
+        .amazon-gift-card {
+            width: 160px;
+            height: 100px;
+            background: linear-gradient(135deg, #232f3e 0%, #131921 100%);
+            border-radius: 8px;
+            margin: 0 auto 25px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.2);
+            border: 1px solid #37475a;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .amazon-gift-card i {
+            font-size: 42px;
+            color: var(--primary-orange);
+        }
+
+        .card-value {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(255, 153, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--primary-orange);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        p.subtitle {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        /* ستايل أزرار الكويز الفخمة */
+        .quiz-step {
+            display: none;
+        }
+
+        .quiz-step.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-opt {
+            background-color: #252929;
+            color: var(--text-light);
+            border: 1px solid #3a3f3f;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn-opt:hover {
+            border-color: var(--primary-orange);
+            background-color: #2e3333;
+            transform: translateX(4px);
+        }
+
+        .btn-opt i {
+            color: var(--text-gray);
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .btn-opt:hover i {
+            color: var(--primary-orange);
+        }
+
+        /* أنيميشين التحقق الأخير تع الـ CPA */
+        .loader-container {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 153, 0, 0.1);
+            border-left-color: var(--primary-orange);
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-line {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-top: 8px;
+            height: 20px;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: #484e4e;
+            width: 100%;
+            border-top: 1px solid #1a1d1d;
+            background-color: #0b0c0c;
+        }
+
+        footer a {
+            color: #484e4e;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VOX<span>PANEL</span></div>
+    </header>
+
+    <div class="main-container">
+        <div class="card">
+            
+            <!-- بطاقة أمازون العائمة الفخمة -->
+            <div class="amazon-gift-card">
+                <i class="fab fa-amazon"></i>
+                <div class="card-value">$2,000</div>
+            </div>
+
+            <!-- الخطوة 1 -->
+            <div class="quiz-step active" id="step-1">
+                <h1>Claim Your $2,000 Amazon Sweepstake Entry</h1>
+                <p class="subtitle">Complete our brief consumer audit to unlock your entry voucher allocation.</p>
+                <div class="btn-container">
+                    <button class="btn-opt" onclick="nextStep(2)"><span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> Daily Shopping</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="nextStep(2)"><span><i class="fas fa-laptop" style="margin-right: 10px;"></i> Weekly Online Only</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="nextStep(2)"><span><i class="fas fa-calendar-alt" style="margin-right: 10px;"></i> Rare / Seasonal</span> <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- الخطوة 2 -->
+            <div class="quiz-step" id="step-2">
+                <h1>Do you currently hold an active Amazon Prime Membership?</h1>
+                <p class="subtitle">This helps us classify your reward distribution speed.</p>
+                <div class="btn-container">
+                    <button class="btn-opt" onclick="nextStep(3)"><span>Yes, Prime Active</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="nextStep(3)"><span>No, Standard Account</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="nextStep(3)"><span>Planning to join soon</span> <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- الخطوة 3 -->
+            <div class="quiz-step" id="step-3">
+                <h1>Confirm Device Ownership for Secure Tracking</h1>
+                <p class="subtitle">Select the operating system you are currently using.</p>
+                <div class="btn-container">
+                    <button class="btn-opt" onclick="startLoading()"><span><i class="fab fa-apple" style="margin-right: 10px;"></i> Apple iOS / macOS</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="startLoading()"><span><i class="fab fa-android" style="margin-right: 10px;"></i> Android Mobile</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="startLoading()"><span><i class="fab fa-windows" style="margin-right: 10px;"></i> Windows Desktop</span> <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- شاشة التحميل والتحقق والتوجيه للعرض -->
+            <div class="loader-container" id="loader">
+                <div class="spinner"></div>
+                <h2 style="font-size: 18px; margin-bottom: 5px;">Analyzing Responses...</h2>
+                <div class="status-line" id="status-text">Connecting to Amazon reward database...</div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 VoxPanel Global Research. All rights reserved.</p>
+        <p style="margin-top: 5px;">
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a>
+        </p>
+    </footer>
+
+    <script>
+        // هنا تحط رابط الأفلييت تاعك تاع ماكس باونتي ديريكتومون!
+        const affiliateLink = "حط_رابط_الأفلييت_تاعك_هنا";
+
+        function nextStep(stepNum) {
+            document.querySelectorAll('.quiz-step').forEach(step => step.classList.remove('active'));
+            document.getElementById('step-' + stepNum).classList.add('active');
+        }
+
+        function startLoading() {
+            document.querySelectorAll('.quiz-step').forEach(step => step.style.display = 'none');
+            document.getElementById('loader').style.display = 'block';
+            
+            const lines = [
+                "Validating secure user tracking node...",
+                "Allocating $2,000 Sweepstake Entry Ticket...",
+                "Matching demographic data to active pools...",
+                "Redirecting to secure confirmation page..."
+            ];
+            
+            let i = 0;
+            const interval = setInterval(() => {
+                if(i < lines.length) {
+                    document.getElementById('status-text').innerText = lines[i];
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    window.location.href = affiliateLink; // يبعث الزاير ديريكت لعرض ماكس باونتي
+                }
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
