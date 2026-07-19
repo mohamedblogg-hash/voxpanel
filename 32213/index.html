@@ -1,7 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSW8H2NVQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-RSW8H2NVQ');
+    </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +17,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         :root {
-            --bg-color: #0f1111; /* خلفية أمازون الداكنة الفخمة */
+            --bg-color: #0f1111; 
             --card-bg: #1a1d1d;
-            --primary-orange: #ff9900; /* برتقالي أمازون الرسمي */
+            --primary-orange: #ff9900; 
             --amazon-blue: #146eb4;
             --text-light: #ffffff;
             --text-gray: #a7a9a9;
@@ -80,7 +88,6 @@
             background: linear-gradient(90deg, var(--primary-orange), var(--amazon-blue));
         }
 
-        /* أنيميشين لبطاقة أمازون الفخمة */
         .amazon-gift-card {
             width: 160px;
             height: 100px;
@@ -135,7 +142,6 @@
             line-height: 1.5;
         }
 
-        /* ستايل أزرار الكويز الفخمة */
         .quiz-step {
             display: none;
         }
@@ -188,7 +194,6 @@
             color: var(--primary-orange);
         }
 
-        /* أنيميشين التحقق الأخير تع الـ CPA */
         .loader-container {
             display: none;
             text-align: center;
@@ -242,7 +247,6 @@
     <div class="main-container">
         <div class="card">
             
-            <!-- بطاقة أمازون العائمة الفخمة -->
             <div class="amazon-gift-card">
                 <i class="fab fa-amazon"></i>
                 <div class="card-value">$2,000</div>
@@ -275,9 +279,9 @@
                 <h1>Confirm Device Ownership for Secure Tracking</h1>
                 <p class="subtitle">Select the operating system you are currently using.</p>
                 <div class="btn-container">
-                    <button class="btn-opt" onclick="startLoading()"><span><i class="fab fa-apple" style="margin-right: 10px;"></i> Apple iOS / macOS</span> <i class="fas fa-chevron-right"></i></button>
-                    <button class="btn-opt" onclick="startLoading()"><span><i class="fab fa-android" style="margin-right: 10px;"></i> Android Mobile</span> <i class="fas fa-chevron-right"></i></button>
-                    <button class="btn-opt" onclick="startLoading()"><span><i class="fab fa-windows" style="margin-right: 10px;"></i> Windows Desktop</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="startLoading('Apple')"><span><i class="fab fa-apple" style="margin-right: 10px;"></i> Apple iOS / macOS</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="startLoading('Android')"><span><i class="fab fa-android" style="margin-right: 10px;"></i> Android Mobile</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="startLoading('Windows')"><span><i class="fab fa-windows" style="margin-right: 10px;"></i> Windows Desktop</span> <i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
 
@@ -298,7 +302,6 @@
         </p>
     </footer>
 
-    <!-- الفوتر القانوني تع الكويز -->
     <div style="text-align: center; padding: 20px; margin-top: 30px; font-size: 13px; color: #5f758e; position: relative; z-index: 10;">
         <p style="margin-bottom: 6px;">© 2026 VoxPanel Global Research. All rights reserved.</p>
         <div class="footer-links">
@@ -309,7 +312,6 @@
     </div>
 
     <script>
-        // هنا تحط رابط الأفلييت تاعك تاع ماكس باونتي ديريكتومون!
         const affiliateLink = "https://afflat3c2.com/trk/lnk/8E524FAC-EF58-4442-8A39-105ED36588DA/?o=32213&c=918277&a=800142&k=F9EC350BC205F12AF519DA7E1B48CD2A&l=37863";
 
         function nextStep(stepNum) {
@@ -317,7 +319,15 @@
             document.getElementById('step-' + stepNum).classList.add('active');
         }
 
-        function startLoading() {
+        function startLoading(deviceType) {
+            // تتبع الكليكة الأخيرة ونوع الجهاز في Google Analytics قبل التوجيه
+            if (typeof gtag === 'function') {
+                gtag('event', 'quiz_lead_complete', {
+                    'event_category': 'CPA_Funnel',
+                    'event_label': deviceType
+                });
+            }
+
             document.querySelectorAll('.quiz-step').forEach(step => step.style.display = 'none');
             document.getElementById('loader').style.display = 'block';
             
@@ -335,7 +345,7 @@
                     i++;
                 } else {
                     clearInterval(interval);
-                    window.location.href = affiliateLink; // يبعث الزاير ديريكت لعرض ماكس باونتي
+                    window.location.href = affiliateLink; 
                 }
             }, 1200);
         }
