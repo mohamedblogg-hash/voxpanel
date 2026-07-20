@@ -17,12 +17,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         :root {
-            --bg-color: #0f1111; 
-            --card-bg: #1a1d1d;
+            --bg-color: #090a0a; 
+            --card-bg: rgba(22, 26, 26, 0.85);
             --primary-orange: #ff9900; 
             --amazon-blue: #146eb4;
             --text-light: #ffffff;
             --text-gray: #a7a9a9;
+            --accent-red: #ff3b30;
         }
 
         * {
@@ -41,41 +42,74 @@
             justify-content: space-between;
             align-items: center;
             overflow-x: hidden;
+            background: radial-gradient(circle at center, #141f29 0%, #090a0a 100%);
+        }
+
+        /* الـ Hook تع الـ عـجلة من الفوق قاع */
+        .urgency-bar {
+            background-color: var(--accent-red);
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .urgency-bar i {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         header {
-            margin-top: 30px;
+            margin-top: 25px;
             text-align: center;
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--text-light);
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.4);
         }
 
         .logo span {
             color: var(--primary-orange);
-            text-shadow: 0 0 15px rgba(255, 153, 0, 0.4);
         }
 
         .main-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 520px; /* تكبير الكارتة شوية للـ ديزاين الفاخر */
             padding: 20px;
             z-index: 2;
+            margin-top: auto;
+            margin-bottom: auto;
         }
 
+        /* ديزاين فاخر مع تأثير الـ Glow والـ Glassmorphism */
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid #2a2e2e;
-            border-radius: 16px;
-            padding: 30px 24px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 153, 0, 0.15);
+            border-radius: 24px;
+            padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 50px rgba(255, 153, 0, 0.03);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .card::before {
@@ -85,61 +119,65 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-orange), var(--amazon-blue));
+            background: linear-gradient(90deg, var(--primary-orange), #ffc400, var(--amazon-blue));
         }
 
+        /* تكبير وتحسين كارت أمازون */
         .amazon-gift-card {
-            width: 160px;
-            height: 100px;
+            width: 200px;
+            height: 125px;
             background: linear-gradient(135deg, #232f3e 0%, #131921 100%);
-            border-radius: 8px;
-            margin: 0 auto 25px auto;
+            border-radius: 12px;
+            margin: 0 auto 30px auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.2);
             border: 1px solid #37475a;
-            animation: float 3s ease-in-out infinite;
+            animation: float 3.5s ease-in-out infinite;
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
         .amazon-gift-card i {
-            font-size: 42px;
+            font-size: 55px;
             color: var(--primary-orange);
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .card-value {
             position: absolute;
-            bottom: 8px;
-            right: 12px;
-            font-size: 14px;
-            font-weight: 700;
+            bottom: 12px;
+            right: 16px;
+            font-size: 16px;
+            font-weight: 800;
             color: #fff;
-            background: rgba(255, 153, 0, 0.2);
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid var(--primary-orange);
+            background: var(--primary-orange);
+            color: #131921;
+            padding: 3px 10px;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         h1 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 14px;
             line-height: 1.3;
+            letter-spacing: -0.5px;
         }
 
         p.subtitle {
             color: var(--text-gray);
-            font-size: 14px;
-            margin-bottom: 30px;
-            line-height: 1.5;
+            font-size: 15px;
+            margin-bottom: 35px;
+            line-height: 1.6;
         }
 
         .quiz-step {
@@ -159,29 +197,32 @@
         .btn-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
+        /* أزرار موديـرن وفاخرة */
         .btn-opt {
-            background-color: #252929;
+            background-color: #202424;
             color: var(--text-light);
-            border: 1px solid #3a3f3f;
-            padding: 14px 20px;
+            border: 1px solid #343a3a;
+            padding: 16px 24px;
             font-size: 16px;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             text-align: left;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .btn-opt:hover {
             border-color: var(--primary-orange);
-            background-color: #2e3333;
-            transform: translateX(4px);
+            background-color: #262c2c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 153, 0, 0.15);
         }
 
         .btn-opt i {
@@ -197,16 +238,16 @@
         .loader-container {
             display: none;
             text-align: center;
-            padding: 20px 0;
+            padding: 30px 0;
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border: 4px solid rgba(255, 153, 0, 0.1);
             border-left-color: var(--primary-orange);
             border-radius: 50%;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 25px auto;
             animation: spin 1s linear infinite;
         }
 
@@ -215,30 +256,41 @@
         }
 
         .status-line {
-            font-size: 14px;
-            color: var(--text-gray);
-            margin-top: 8px;
+            font-size: 15px;
+            color: var(--primary-orange);
+            font-weight: 600;
+            margin-top: 10px;
             height: 20px;
         }
 
         footer {
-            padding: 20px;
+            padding: 25px 20px;
             text-align: center;
-            font-size: 11px;
-            color: #484e4e;
+            font-size: 12px;
+            color: #5f758e;
             width: 100%;
-            border-top: 1px solid #1a1d1d;
-            background-color: #0b0c0c;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            background-color: #060707;
         }
 
         footer a {
-            color: #484e4e;
+            color: #5f758e;
             text-decoration: none;
-            margin: 0 8px;
+            margin: 0 10px;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--primary-orange);
         }
     </style>
 </head>
 <body>
+
+    <!-- الـ Hook الفوقاني لجلب الانتباه والـ Urgency -->
+    <div class="urgency-bar">
+        <i class="fas fa-exclamation-circle"></i> Limited Offer: Only 14 Voucher Slots Left For Today!
+    </div>
 
     <header>
         <div class="logo">VOX<span>PANEL</span></div>
@@ -247,6 +299,7 @@
     <div class="main-container">
         <div class="card">
             
+            <!-- الكارتة الكبيرة الفاخرة تع أمازون -->
             <div class="amazon-gift-card">
                 <i class="fab fa-amazon"></i>
                 <div class="card-value">$2,000</div>
@@ -257,9 +310,9 @@
                 <h1>Claim Your $2,000 Amazon Sweepstake Entry</h1>
                 <p class="subtitle">Complete our brief consumer audit to unlock your entry voucher allocation.</p>
                 <div class="btn-container">
-                    <button class="btn-opt" onclick="nextStep(2)"><span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> Daily Shopping</span> <i class="fas fa-chevron-right"></i></button>
-                    <button class="btn-opt" onclick="nextStep(2)"><span><i class="fas fa-laptop" style="margin-right: 10px;"></i> Weekly Online Only</span> <i class="fas fa-chevron-right"></i></button>
-                    <button class="btn-opt" onclick="nextStep(2)"><span><i class="fas fa-calendar-alt" style="margin-right: 10px;"></i> Rare / Seasonal</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="nextStep(2)"><span><i class="fas fa-shopping-cart" style="margin-right: 12px; color: var(--primary-orange);"></i> Daily Shopping</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="nextStep(2)"><span><i class="fas fa-laptop" style="margin-right: 12px; color: var(--primary-orange);"></i> Weekly Online Only</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="nextStep(2)"><span><i class="fas fa-calendar-alt" style="margin-right: 12px; color: var(--primary-orange);"></i> Rare / Seasonal</span> <i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
 
@@ -279,37 +332,31 @@
                 <h1>Confirm Device Ownership for Secure Tracking</h1>
                 <p class="subtitle">Select the operating system you are currently using.</p>
                 <div class="btn-container">
-                    <button class="btn-opt" onclick="startLoading('Apple')"><span><i class="fab fa-apple" style="margin-right: 10px;"></i> Apple iOS / macOS</span> <i class="fas fa-chevron-right"></i></button>
-                    <button class="btn-opt" onclick="startLoading('Android')"><span><i class="fab fa-android" style="margin-right: 10px;"></i> Android Mobile</span> <i class="fas fa-chevron-right"></i></button>
-                    <button class="btn-opt" onclick="startLoading('Windows')"><span><i class="fab fa-windows" style="margin-right: 10px;"></i> Windows Desktop</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="startLoading('Apple')"><span><i class="fab fa-apple" style="margin-right: 12px; color: #fff;"></i> Apple iOS / macOS</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="startLoading('Android')"><span><i class="fab fa-android" style="margin-right: 12px; color: #3ddc84;"></i> Android Mobile</span> <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-opt" onclick="startLoading('Windows')"><span><i class="fab fa-windows" style="margin-right: 12px; color: #0078d4;"></i> Windows Desktop</span> <i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
 
             <!-- شاشة التحميل والتحقق والتوجيه للعرض -->
             <div class="loader-container" id="loader">
                 <div class="spinner"></div>
-                <h2 style="font-size: 18px; margin-bottom: 5px;">Analyzing Responses...</h2>
+                <h2 style="font-size: 20px; margin-bottom: 5px; font-weight: 700;">Analyzing Responses...</h2>
                 <div class="status-line" id="status-text">Connecting to Amazon reward database...</div>
             </div>
 
         </div>
     </div>
 
+    <!-- الـ Footer النقي والـ مريـgـل مع روابط الصفحات المباشرة -->
     <footer>
         <p>© 2026 VoxPanel Global Research. All rights reserved.</p>
-        <p style="margin-top: 5px;">
-            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a>
-        </p>
-    </footer>
-
-    <div style="text-align: center; padding: 20px; margin-top: 30px; font-size: 13px; color: #5f758e; position: relative; z-index: 10;">
-        <p style="margin-bottom: 6px;">© 2026 VoxPanel Global Research. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="https://voxpanel.xyz/privacy.html" target="_blank" style="color: #5f758e; text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
-            <a href="https://voxpanel.xyz/terms.html" target="_blank" style="color: #5f758e; text-decoration: none; margin: 0 10px;">Terms of Service</a> | 
-            <a href="https://voxpanel.xyz/contact.html" target="_blank" style="color: #5f758e; text-decoration: none; margin: 0 10px;">Contact Us</a>
+        <div style="margin-top: 8px;">
+            <a href="https://voxpanel.xyz/privacy.html" target="_blank">Privacy Policy</a> | 
+            <a href="https://voxpanel.xyz/terms.html" target="_blank">Terms of Service</a> | 
+            <a href="https://voxpanel.xyz/contact.html" target="_blank">Contact Us</a>
         </div>
-    </div>
+    </footer>
 
     <script>
         const affiliateLink = "https://afflat3c2.com/trk/lnk/8E524FAC-EF58-4442-8A39-105ED36588DA/?o=32213&c=918277&a=800142&k=F9EC350BC205F12AF519DA7E1B48CD2A&l=37863";
@@ -320,7 +367,6 @@
         }
 
         function startLoading(deviceType) {
-            // تتبع الكليكة الأخيرة ونوع الجهاز في Google Analytics قبل التوجيه
             if (typeof gtag === 'function') {
                 gtag('event', 'quiz_lead_complete', {
                     'event_category': 'CPA_Funnel',
