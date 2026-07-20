@@ -12,7 +12,6 @@
   gtag('config', 'G-RSW8H20NVQ');
 </script>
 
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoxPanel - Global Consumer Analytics</title>
@@ -38,13 +37,13 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* باش يدز الفوتر للتحت قاع والسيت يبقى قصير */
+            justify-content: space-between;
             align-items: center;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        /* خلفية اليخت الفخم */
+        /* خلفية الطبيعة الزاهية مع الـ Blurry والـ Low Dark Overlay */
         .bg-overlay {
             position: absolute;
             top: 0;
@@ -52,9 +51,10 @@
             width: 100%;
             height: 100%;
             background: 
-                linear-gradient(135deg, rgba(4, 10, 15, 0.94) 0%, rgba(4, 10, 15, 0.85) 100%),
-                url('https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?q=80&w=1200&auto=format&fit=crop') no-repeat center center/cover;
-            filter: blur(4px);
+                linear-gradient(135deg, rgba(4, 10, 15, 0.88) 0%, rgba(4, 10, 15, 0.75) 100%),
+                url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=1200&auto=format&fit=crop') no-repeat center center/cover;
+            filter: blur(6px);
+            transform: scale(1.05); /* باش الـ Blur ما يخليش حواف بيضاء */
             z-index: 1;
         }
 
@@ -62,18 +62,21 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            max-width: 620px;
-            padding: 40px;
-            background: rgba(11, 18, 24, 0.7);
+            max-width: 540px;
+            width: 90%;
+            padding: 40px 30px;
+            background: rgba(11, 18, 24, 0.75);
             border-radius: 24px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 229, 255, 0.05);
-            margin-top: auto; /* باش يجي في النص بالظبط */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 229, 255, 0.08);
+            margin-top: auto;
             margin-bottom: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 900;
             letter-spacing: 5px;
             margin-bottom: 25px;
@@ -86,17 +89,17 @@
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 800;
             margin-bottom: 20px;
             letter-spacing: -0.5px;
-            line-height: 1.2;
+            line-height: 1.25;
         }
 
         p.tagline {
             color: #b0c4de;
-            font-size: 16px;
-            margin-bottom: 45px;
+            font-size: 15px;
+            margin-bottom: 40px;
             line-height: 1.6;
         }
 
@@ -104,41 +107,42 @@
             background: linear-gradient(135deg, var(--miami-blue), var(--sky-blue));
             color: #040a0f;
             border: none;
-            padding: 18px 45px;
+            padding: 18px 40px;
             font-size: 16px;
             font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.35);
             transition: all 0.3s ease;
             letter-spacing: 1px;
+            width: 100%; /* ترجع تدي العرض كامل فالتليفون باش تجي ساهلة للكليك */
+            max-width: 340px;
         }
 
         .cta-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 40px rgba(0, 229, 255, 0.6);
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.65);
         }
 
-        /* الفوتر المستيك تع الصح كيما الـ Screenshot */
         footer {
             position: relative;
             z-index: 2;
             width: 100%;
             text-align: center;
-            padding-bottom: 30px;
+            padding-bottom: 25px;
             padding-top: 10px;
         }
 
         footer p {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-gray);
             margin-bottom: 6px;
         }
 
         .footer-links {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-gray);
         }
 
@@ -151,6 +155,24 @@
         .footer-links a:hover {
             color: var(--miami-blue);
         }
+
+        /* Responsive مريغلة للتليفونات الصغار */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 26px;
+            }
+            p.tagline {
+                font-size: 14px;
+                margin-bottom: 35px;
+            }
+            .main-content {
+                padding: 35px 20px;
+            }
+            .cta-btn {
+                padding: 16px 30px;
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -159,12 +181,11 @@
 
     <div class="main-content">
         <div class="logo">VOX<span>PANEL</span></div>
-        <h1>Global Consumer Intelligence</h1>
-        <p class="tagline">We collect decentralized demographic audits for enterprise market research. Participating members are compensated for sharing unique consumer perspectives.</p>
-        <a href="https://voxpanel.xyz/32213/" class="cta-btn">JOIN RESEARCH PANEL</a>
+        <h1>Claim Your $2,000 Amazon Gift Card Reward</h1>
+        <p class="tagline">VoxPanel is conducting a decentralized demographic audit for enterprise market research. Complete the verification steps below to receive your allocated Amazon promotional balance.</p>
+        <a href="https://voxpanel.xyz/32213/" class="cta-btn">CLAIM YOUR OFFER</a>
     </div>
 
-    <!-- الفوتر المريغل تع 2026 -->
     <footer>
         <p>© 2026 VoxPanel Global Research. All rights reserved.</p>
         <div class="footer-links">
