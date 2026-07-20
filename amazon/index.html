@@ -15,6 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoxPanel - Premium Rewards</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <!-- مكتبة الحفلة والـ Confetti الملون المقنعة ف الفيديو -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --bg-color: #06080a; 
@@ -208,7 +210,6 @@
             color: var(--primary-orange);
         }
 
-        /* ستايل خانة الإيميل الجديدة تع الفيديو */
         .input-group {
             margin-bottom: 20px;
             text-align: left;
@@ -258,20 +259,42 @@
             transform: translateY(-2px);
         }
 
+        /* سبينر التحقق المصغر الخاص بخطوة الإيميل */
+        .mini-loader {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .mini-spinner {
+            width: 35px;
+            height: 35px;
+            border: 3px solid rgba(255, 153, 0, 0.1);
+            border-left-color: var(--primary-orange);
+            border-radius: 50%;
+            margin: 0 auto 15px auto;
+            animation: spin 0.8s linear infinite;
+        }
+
         .success-box {
             display: none;
             background: rgba(46, 204, 113, 0.1);
             border: 1px solid var(--success-green);
-            padding: 20px;
+            padding: 25px 20px;
             border-radius: 12px;
             margin-top: 15px;
-            animation: fadeIn 0.4s ease-in-out;
+            animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .success-box i {
-            font-size: 28px;
+            font-size: 34px;
             color: var(--success-green);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .loader-container {
@@ -372,18 +395,19 @@
                 </div>
             </div>
 
-            <!-- شاشة التحميل الوهمية -->
+            <!-- شاشة التحميل الوهمية الأولى -->
             <div class="loader-container" id="loader">
                 <div class="spinner"></div>
                 <h2 style="font-size: 20px; margin-bottom: 5px; font-weight: 700;">Analyzing Responses...</h2>
                 <div class="status-line" id="status-text">Connecting to Amazon reward database...</div>
             </div>
 
-            <!-- خطوة الإيميل الوهمية تع الـ فيديو (Fake Conversion Page) -->
+            <!-- خطوة الإيميل الوهمية تع الـ فيديو -->
             <div class="quiz-step" id="step-fake">
                 <h1 style="color: var(--primary-orange);">Voucher Allocated!</h1>
                 <p class="subtitle">Enter your primary email address below to immediately dispatch your secure digital claim code.</p>
                 
+                <!-- الـ Form لي يختفي عند النقر -->
                 <div id="fake-form">
                     <div class="input-group">
                         <label for="fake-email">Delivery Email Address</label>
@@ -392,11 +416,17 @@
                     <button class="btn-submit" onclick="submitFakeForm()">Claim Your Gift Card</button>
                 </div>
 
-                <!-- رسالة النجاح لي تخرج ف الـ فيديو مورا ما تكليكي -->
+                <!-- الـ Loading المصغر المضاف لـ مظهر إحترافي -->
+                <div class="mini-loader" id="mini-loader">
+                    <div class="mini-spinner"></div>
+                    <p style="font-size: 14px; color: var(--primary-orange); font-weight: 600;">Verifying and securing your reward node...</p>
+                </div>
+
+                <!-- رسالة النجاح الكبيرة مع تأثير الحفلة المضاف -->
                 <div class="success-box" id="success-message">
                     <i class="fas fa-check-circle"></i>
-                    <h3 style="font-size: 18px; margin-bottom: 5px; color: var(--success-green);">Congratulations!</h3>
-                    <p style="font-size: 14px; color: var(--text-gray);">Your $2,000 Amazon Gift Card has been reserved. Please check your email inbox to verify ownership and reveal the voucher pin.</p>
+                    <h3 style="font-size: 20px; margin-bottom: 8px; color: var(--success-green);">Congratulations!</h3>
+                    <p style="font-size: 14px; color: var(--text-gray); line-height: 1.5;">Your $2,000 Amazon Gift Card has been successfully reserved and generated. Please check your email inbox to verify ownership and reveal your voucher code.</p>
                 </div>
             </div>
 
@@ -443,23 +473,54 @@
                     i++;
                 } else {
                     clearInterval(interval);
-                    // في عِوض يروح للـ Affiliate Link، نبعثوه للباج الوهمية تع الفيديو
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('step-fake').classList.add('active');
                 }
             }, 1200);
         }
 
-        // الـ دالة لي توري الـ Hook والـ Congrats كي تكليكي ف الفيديو
+        // دالة إرسال الإيميل مع الـ Delay والـ Confetti الحفلة الجديد
         function submitFakeForm() {
             const emailVal = document.getElementById('fake-email').value;
             if(emailVal.trim() === "") {
                 alert("Please enter a valid email address.");
                 return;
             }
-            // نخفي الفورم ونبين رسالة الربح والـ مبروك
+            
+            // 1. نخفوا الـ فورم ونبينو السبينر يدور
             document.getElementById('fake-form').style.display = 'none';
-            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('mini-loader').style.display = 'block';
+            
+            // 2. نخلوه يستنى ثانية و 800 ميلي ثانية تع الفيريفيكاسيون بالكدب
+            setTimeout(() => {
+                // إخفاء الـ سبينر وإظهار باج مبروك
+                document.getElementById('mini-loader').style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+                
+                // 3. تأثير الـ Confetti (تأثير الحفلة والورق المتطاير ف الشاشة)
+                var duration = 3 * 1000;
+                var end = Date.now() + duration;
+
+                (function frame() {
+                    confetti({
+                        particleCount: 4,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0, y: 0.8 } // يطير ماليسار
+                    });
+                    confetti({
+                        particleCount: 4,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1, y: 0.8 } // يطير ماليمين
+                    });
+
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                }());
+                
+            }, 1800); 
         }
     </script>
 </body>
