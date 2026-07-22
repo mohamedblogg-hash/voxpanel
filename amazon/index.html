@@ -15,8 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoxPanel - Premium Rewards</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <!-- مكتبة الحفلة والـ Confetti الملون المقنعة ف الفيديو -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --bg-color: #06080a; 
@@ -25,7 +23,6 @@
             --amazon-blue: #146eb4;
             --text-light: #ffffff;
             --text-gray: #a2aab2;
-            --success-green: #2ecc71;
         }
 
         * {
@@ -72,6 +69,7 @@
             margin-bottom: auto;
         }
 
+        /* ديزاين فاخر مع حواف نيون مضيئة ومتحركة */
         .card {
             background: var(--card-bg);
             border-radius: 24px;
@@ -84,6 +82,7 @@
             overflow: hidden;
         }
 
+        /* تأثير الـ Neon Border الدائر على الحواف */
         .card::before {
             content: '';
             position: absolute;
@@ -92,7 +91,7 @@
             width: 100%;
             height: 100%;
             border-radius: 24px;
-            padding: 1.5px; 
+            padding: 1.5px; /* غلظ الخط تع الـ حافة */
             background: linear-gradient(135deg, rgba(255, 153, 0, 0.4) 0%, rgba(20, 110, 180, 0.1) 50%, rgba(255, 153, 0, 0.4) 100%);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
@@ -100,6 +99,7 @@
             pointer-events: none;
         }
 
+        /* كارتة أمازون الـ Premium الطايرة */
         .amazon-gift-card {
             width: 220px;
             height: 135px;
@@ -177,6 +177,7 @@
             gap: 14px;
         }
 
+        /* أزرار فاخرة متناسقة مع الـ كارتة */
         .btn-opt {
             background-color: rgba(32, 38, 46, 0.5);
             color: var(--text-light);
@@ -208,93 +209,6 @@
 
         .btn-opt:hover i {
             color: var(--primary-orange);
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            color: var(--text-gray);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .email-field {
-            width: 100%;
-            padding: 16px;
-            background: rgba(15, 22, 30, 0.9);
-            border: 1px solid rgba(255, 153, 0, 0.2);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .email-field:focus {
-            border-color: var(--primary-orange);
-            box-shadow: 0 0 12px rgba(255, 153, 0, 0.2);
-        }
-
-        .btn-submit {
-            background: var(--primary-orange);
-            color: #06080a;
-            border: none;
-            padding: 16px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.25s;
-            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
-        }
-
-        .btn-submit:hover {
-            background: #e68a00;
-            transform: translateY(-2px);
-        }
-
-        /* سبينر التحقق المصغر الخاص بخطوة الإيميل */
-        .mini-loader {
-            display: none;
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .mini-spinner {
-            width: 35px;
-            height: 35px;
-            border: 3px solid rgba(255, 153, 0, 0.1);
-            border-left-color: var(--primary-orange);
-            border-radius: 50%;
-            margin: 0 auto 15px auto;
-            animation: spin 0.8s linear infinite;
-        }
-
-        .success-box {
-            display: none;
-            background: rgba(46, 204, 113, 0.1);
-            border: 1px solid var(--success-green);
-            padding: 25px 20px;
-            border-radius: 12px;
-            margin-top: 15px;
-            animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes scaleIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .success-box i {
-            font-size: 34px;
-            color: var(--success-green);
-            margin-bottom: 12px;
         }
 
         .loader-container {
@@ -362,7 +276,7 @@
                 <div class="card-value">$2,000</div>
             </div>
 
-            <!-- الخطوة 1 -->
+            <!-- الخطوة 1 (بعد التعديل وحذف الخرطي) -->
             <div class="quiz-step active" id="step-1">
                 <h1>Claim Your $2,000 Amazon Gift Card</h1>
                 <p class="subtitle">Complete our brief consumer audit to unlock your reward allocation.</p>
@@ -395,39 +309,11 @@
                 </div>
             </div>
 
-            <!-- شاشة التحميل الوهمية الأولى -->
+            <!-- شاشة التحميل -->
             <div class="loader-container" id="loader">
                 <div class="spinner"></div>
                 <h2 style="font-size: 20px; margin-bottom: 5px; font-weight: 700;">Analyzing Responses...</h2>
                 <div class="status-line" id="status-text">Connecting to Amazon reward database...</div>
-            </div>
-
-            <!-- خطوة الإيميل الوهمية تع الـ فيديو -->
-            <div class="quiz-step" id="step-fake">
-                <h1 style="color: var(--primary-orange);">Voucher Allocated!</h1>
-                <p class="subtitle">Enter your primary email address below to immediately dispatch your secure digital claim code.</p>
-                
-                <!-- الـ Form لي يختفي عند النقر -->
-                <div id="fake-form">
-                    <div class="input-group">
-                        <label for="fake-email">Delivery Email Address</label>
-                        <input type="email" id="fake-email" class="email-field" placeholder="name@example.com" autocomplete="off">
-                    </div>
-                    <button class="btn-submit" onclick="submitFakeForm()">Claim Your Gift Card</button>
-                </div>
-
-                <!-- الـ Loading المصغر المضاف لـ مظهر إحترافي -->
-                <div class="mini-loader" id="mini-loader">
-                    <div class="mini-spinner"></div>
-                    <p style="font-size: 14px; color: var(--primary-orange); font-weight: 600;">Verifying and securing your reward node...</p>
-                </div>
-
-                <!-- رسالة النجاح الكبيرة مع تأثير الحفلة المضاف -->
-                <div class="success-box" id="success-message">
-                    <i class="fas fa-check-circle"></i>
-                    <h3 style="font-size: 20px; margin-bottom: 8px; color: var(--success-green);">Congratulations!</h3>
-                    <p style="font-size: 14px; color: var(--text-gray); line-height: 1.5;">Your $2,000 Amazon Gift Card has been successfully reserved and generated. Please check your email inbox to verify ownership and reveal your voucher code.</p>
-                </div>
             </div>
 
         </div>
@@ -443,6 +329,8 @@
     </footer>
 
     <script>
+        const affiliateLink = "https://afflat3c2.com/trk/lnk/8E524FAC-EF58-4442-8A39-105ED36588DA/?o=32213&c=918277&a=800142&k=F9EC350BC205F12AF519DA7E1B48CD2A&l=37863";
+
         function nextStep(stepNum) {
             document.querySelectorAll('.quiz-step').forEach(step => step.classList.remove('active'));
             document.getElementById('step-' + stepNum).classList.add('active');
@@ -456,7 +344,7 @@
                 });
             }
 
-            document.querySelectorAll('.quiz-step').forEach(step => step.classList.remove('active'));
+            document.querySelectorAll('.quiz-step').forEach(step => step.style.display = 'none');
             document.getElementById('loader').style.display = 'block';
             
             const lines = [
@@ -473,54 +361,9 @@
                     i++;
                 } else {
                     clearInterval(interval);
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('step-fake').classList.add('active');
+                    window.location.href = affiliateLink; 
                 }
             }, 1200);
-        }
-
-        // دالة إرسال الإيميل مع الـ Delay والـ Confetti الحفلة الجديد
-        function submitFakeForm() {
-            const emailVal = document.getElementById('fake-email').value;
-            if(emailVal.trim() === "") {
-                alert("Please enter a valid email address.");
-                return;
-            }
-            
-            // 1. نخفوا الـ فورم ونبينو السبينر يدور
-            document.getElementById('fake-form').style.display = 'none';
-            document.getElementById('mini-loader').style.display = 'block';
-            
-            // 2. نخلوه يستنى ثانية و 800 ميلي ثانية تع الفيريفيكاسيون بالكدب
-            setTimeout(() => {
-                // إخفاء الـ سبينر وإظهار باج مبروك
-                document.getElementById('mini-loader').style.display = 'none';
-                document.getElementById('success-message').style.display = 'block';
-                
-                // 3. تأثير الـ Confetti (تأثير الحفلة والورق المتطاير ف الشاشة)
-                var duration = 3 * 1000;
-                var end = Date.now() + duration;
-
-                (function frame() {
-                    confetti({
-                        particleCount: 4,
-                        angle: 60,
-                        spread: 55,
-                        origin: { x: 0, y: 0.8 } // يطير ماليسار
-                    });
-                    confetti({
-                        particleCount: 4,
-                        angle: 120,
-                        spread: 55,
-                        origin: { x: 1, y: 0.8 } // يطير ماليمين
-                    });
-
-                    if (Date.now() < end) {
-                        requestAnimationFrame(frame);
-                    }
-                }());
-                
-            }, 1800); 
         }
     </script>
 </body>
